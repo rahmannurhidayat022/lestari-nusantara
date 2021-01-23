@@ -4,18 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Data Blogs - SantriKoding.com</title>
+    <title>Cagar Budaya - Bandung</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <body style="background: lightgray">
-
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Lestari Budaya Nusantara</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="form-inline my-2 my-lg-0 ml-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <a href="{{ route('blog.create') }}" class="btn btn-small btn-success mb-3">TAMBAH BLOG</a>
+            </div>
+        </div>
+    </nav>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
-                        <a href="{{ route('blog.create') }}" class="btn btn-md btn-success mb-3">TAMBAH BLOG</a>
                         <table class="table table-bordered">
                             <thead>
                               <tr>
@@ -29,7 +43,8 @@
                               @forelse ($blogs as $blog)
                                 <tr>
                                     <td class="text-center">
-                                        <img src="{{ Storage::url('public/blogs/').$blog->image }}" class="rounded" style="width: 150px">
+                                        <img src="{{ Storage::url('public/blogs/').$blog->image }}" class="rounded" style="width: 150px"
+                                            alt="{{ $blog->image }}">
                                     </td>
                                     <td>{{ $blog->title }}</td>
                                     <td>{!! $blog->content !!}</td>
