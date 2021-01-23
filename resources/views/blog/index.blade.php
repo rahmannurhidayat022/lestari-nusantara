@@ -63,13 +63,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mx-1">
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-                        </form>
+                        <a href="{{ route('blog.create') }}" class="btn btn-success"><i class="fas fa-plus-square"></i></a>
                     </li>
                     <li class="nav-item mx-1">
-                        <a href="{{ route('blog.create') }}" class="btn btn-success"><i class="fas fa-plus-square"></i></a>
+                        <a href="https://github.com/rahmannurhidayat022/lestari-nusantara" class="btn btn-dark"><i class="fab fa-github"></i></a>
                     </li>
                 </ul>
             </div>
