@@ -66,7 +66,7 @@
                         <a href="{{ route('blog.create') }}" class="btn btn-success"><i class="fas fa-plus-square"></i></a>
                     </li>
                     <li class="nav-item mx-1">
-                        <a href="https://github.com/rahmannurhidayat022/lestari-nusantara" class="btn btn-dark"><i class="fab fa-github"></i></a>
+                        <a href="https://github.com/rahmannurhidayat022" class="btn btn-dark"><i class="fab fa-github"></i></a>
                     </li>
                 </ul>
             </div>
