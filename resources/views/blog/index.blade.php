@@ -4,70 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cagar Budaya - Bandung</title>
+    <title>Lestari Nusantara</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="{{ Storage::url('public/brands/cb_indonesia.png') }}">
+    <style>
+        .card {
+        min-height: 400px;
+        }
+
+        .card img {
+        height: 150px;
+        background-position: center;
+        object-fit: cover;
+        }
+
+        .card .card-title {
+        min-height: 10px;
+        }
+
+        .card .card-text,p {
+        height: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-indent: 20px;
+        text-align: justify;
+        }
+
+        .card .menu {
+        min-height: 120px;
+        }
+
+        .card .card-text,.menu {
+        font-size: 13px;
+        }
+
+        .menu ul {
+        padding-left: 20px;
+        }
+
+        .menu ul li {
+        list-style: none;
+        }
+    </style>
 </head>
 <body style="background: lightgray">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#">Lestari Budaya Nusantara</a>
+            <a class="navbar-brand" href="#">
+                <img src="{{ Storage::url('public/brands/cb_indonesia.png') }}" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+                Lestari Nusantara
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="form-inline my-2 my-lg-0 ml-auto">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <a href="{{ route('blog.create') }}" class="btn btn-small btn-success mb-3">TAMBAH BLOG</a>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item mx-1">
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </li>
+                    <li class="nav-item mx-1">
+                        <a href="{{ route('blog.create') }}" class="btn btn-success"><i class="fas fa-plus-square"></i></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
-    <div class="container mt-5">
+    <div class="container my-5">
         <div class="row">
-            <div class="col-md-12">
-                <div class="card border-0 shadow rounded">
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                              <tr>
-                                <th scope="col">GAMBAR</th>
-                                <th scope="col">JUDUL</th>
-                                <th scope="col">CONTENT</th>
-                                <th scope="col">AKSI</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              @forelse ($blogs as $blog)
-                                <tr>
-                                    <td class="text-center">
-                                        <img src="{{ Storage::url('public/blogs/').$blog->image }}" class="rounded" style="width: 150px"
-                                            alt="{{ $blog->image }}">
-                                    </td>
-                                    <td>{{ $blog->title }}</td>
-                                    <td>{!! $blog->content !!}</td>
-                                    <td class="text-center">
-                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('blog.destroy', $blog->id) }}" method="POST">
-                                            <a href="{{ route('blog.edit', $blog->id) }}" class="btn btn-sm btn-primary">EDIT</a>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                              @empty
-                                  <div class="alert alert-danger">
-                                      Data Blog belum Tersedia.
-                                  </div>
-                              @endforelse
-                            </tbody>
-                          </table>  
-                          {{ $blogs->links() }}
+            @foreach ($blogs as $blog)
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card my-2 shadow-sm">
+                        <img src="{{ Storage::url('public/blogs/').$blog->image }}" class="card-img-top" alt="{{ $blog->image }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $blog->title }}</h5>
+                            {!! $blog->content !!}
+                            <form class="form-inline" onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('blog.destroy', $blog->id) }}" method="POST">
+                                <a href="{{ route('blog.edit', $blog->id) }}" class="btn my-1 btn-block btn-primary"><i class="fas fa-edit"></i></a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn my-1 btn-block btn-danger"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
     
